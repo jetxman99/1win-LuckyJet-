@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucky Jet Analyzer — Documentation</title>
+<style>
+  :root {
+    --violet-1: #6a3aff;
+    --violet-2: #9d7aff;
+    --violet-3: #c4b5fd;
+    --bg-1: #0f0820;
+    --bg-2: #1a1030;
+    --bg-3: #20123a;
+    --bg-4: #15082a;
+    --text: #e6ddff;
+    --text-dim: #8b7bb8;
+    --text-mute: #6a5a8a;
+    --green: #4ade80;
+    --blue: #60a5fa;
+    --gold: #fbbf24;
+    --red: #f87171;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg-1) 100%);
+    color: var(--text);
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    padding: 40px 0 60px;
+    border-bottom: 1px solid rgba(157, 122, 255, 0.15);
+    margin-bottom: 48px;
+  }
+  header .badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background: rgba(106, 58, 255, 0.2);
+    border: 1px solid rgba(157, 122, 255, 0.4);
+    border-radius: 20px;
+    font-size: 12px;
+    color: var(--violet-3);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  header h1 {
+    font-size: clamp(28px, 5vw, 42px);
+    background: linear-gradient(90deg, var(--violet-2), #e0d4ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 14px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  header p {
+    color: var(--text-dim);
+    font-size: 16px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* TABLE OF CONTENTS */
+  .toc {
+    background: var(--bg-3);
+    border: 1px solid rgba(157, 122, 255, 0.2);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 56px;
+  }
+  .toc h2 {
+    font-size: 14px;
+    color: var(--violet-2);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+  .toc ol {
+    list-style: none;
+    counter-reset: toc;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 8px;
+  }
+  .toc li {
+    counter-increment: toc;
+    position: relative;
+    padding-left: 28px;
+  }
+  .toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--violet-2);
+    font-weight: 700;
+    font-size: 12px;
+  }
+  .toc a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .toc a:hover { color: var(--violet-3); }
+
+  /* SECTIONS */
+  section {
+    margin-bottom: 56px;
+    scroll-margin-top: 20px;
+  }
+  section h2 {
+    font-size: 26px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #fff;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+  }
+  section h2 .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--violet-1), var(--violet-2));
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 800;
+    flex-shrink: 0;
+    box-shadow: 0 4px 14px rgba(106, 58, 255, 0.4);
+  }
+  section h3 {
+    font-size: 17px;
+    margin: 24px 0 10px;
+    color: var(--violet-3);
+    font-weight: 700;
+  }
+  section p {
+    color: var(--text-dim);
+    margin-bottom: 14px;
+    font-size: 15px;
+  }
+  section p strong { color: var(--text); font-weight: 600; }
+  section ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 16px;
+  }
+  section ul li {
+    padding: 6px 0 6px 24px;
+    position: relative;
+    color: var(--text-dim);
+    font-size: 15px;
+  }
+  section ul li::before {
+    content: "▸";
+    position: absolute;
+    left: 6px;
+    color: var(--violet-2);
+    font-weight: 700;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--bg-3);
+    border: 1px solid rgba(157, 122, 255, 0.18);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin: 16px 0;
+  }
+  .card-mini {
+    background: var(--bg-3);
+    border: 1px solid rgba(157, 122, 255, 0.18);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .card-mini .label {
+    font-size: 11px;
+    color: var(--violet-2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .card-mini .value {
+    font-size: 15px;
+    color: #fff;
+    font-weight: 600;
+  }
+  .card-mini .desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 6px;
+  }
+
+  /* COLOR DOTS */
+  .dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+  .dot.green { background: var(--green); box-shadow: 0 0 8px var(--green); }
+  .dot.blue { background: var(--blue); box-shadow: 0 0 8px var(--blue); }
+  .dot.violet { background: var(--violet-2); box-shadow: 0 0 8px var(--violet-2); }
+  .dot.gold { background: var(--gold); box-shadow: 0 0 8px var(--gold); }
+  .dot.red { background: var(--red); box-shadow: 0 0 8px var(--red); }
+
+  /* TABLE */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+    background: var(--bg-3);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  th, td {
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid rgba(157, 122, 255, 0.1);
+  }
+  th {
+    background: rgba(106, 58, 255, 0.15);
+    color: var(--violet-3);
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  td { color: var(--text-dim); }
+  td strong { color: #fff; }
+  tr:last-child td { border-bottom: none; }
+
+  /* HIGHLIGHT */
+  .highlight {
+    background: linear-gradient(135deg, rgba(106, 58, 255, 0.15), rgba(157, 122, 255, 0.08));
+    border-left: 3px solid var(--violet-2);
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin: 16px 0;
+    color: var(--text);
+    font-size: 14px;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 40px 0 20px;
+    border-top: 1px solid rgba(157, 122, 255, 0.15);
+    margin-top: 60px;
+    color: var(--text-mute);
+    font-size: 13px;
+  }
+  footer .logo {
+    font-size: 20px;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--violet-2), #e0d4ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+
+  /* BADGES */
+  .badge-inline {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    margin: 0 2px;
+  }
+  .badge-green { background: rgba(74, 222, 128, 0.15); color: var(--green); }
+  .badge-gold { background: rgba(251, 191, 36, 0.15); color: var(--gold); }
+  .badge-red { background: rgba(248, 113, 113, 0.15); color: var(--red); }
+  .badge-violet { background: rgba(157, 122, 255, 0.18); color: var(--violet-2); }
+
+  /* ANIMATION on load */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  section { animation: fadeUp 0.5s ease-out; }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    .container { padding: 24px 16px 60px; }
+    header { padding: 24px 0 36px; }
+    section h2 { font-size: 21px; }
+    .toc ol { grid-template-columns: 1fr; }
+  }
+
+   
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ═══════════ HEADER ═══════════ -->
+  <header>
+    <div class="badge">Documentation officielle</div>
+    <h1>🎯 Lucky Jet Analyzer</h1>
+    <p>Guide complet des fonctionnalités — analyse en temps réel, suivi des coefficients, alertes, et paramètres avancés.</p>
+    <a href="https://wa.me/2290155660457?text=Bonjour%2C%20je%20vous%20contacte%20au%20sujet%20du%20Lucky%20Jet%20Analyzer" target="_blank" rel="noopener" class="whatsapp-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M20.52 3.48A11.94 11.94 0 0 0 12.02 0C5.4 0 .02 5.38.02 12c0 2.12.55 4.18 1.6 6L0 24l6.18-1.6a11.94 11.94 0 0 0 5.84 1.5h.01c6.62 0 12-5.38 12-12 0-3.2-1.25-6.22-3.51-8.42zM12.03 21.8h-.01a9.86 9.86 0 0 1-5.03-1.38l-.36-.22-3.67.95.98-3.57-.23-.37a9.85 9.85 0 0 1-1.51-5.21c0-5.44 4.43-9.87 9.88-9.87 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.98c0 5.44-4.43 9.87-9.87 9.87zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.19 1.87.12.57-.08 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35z"/>
+      </svg>
+      Contacter sur WhatsApp
+    </a>
+  </header>
+
+  <!-- ═══════════ SOMMAIRE ═══════════ -->
+  <nav class="toc">
+    <h2>Sommaire</h2>
+    <ol>
+      <li><a href="#presentation">Présentation générale</a></li>
+      <li><a href="#interface">L'interface et le panneau</a></li>
+      <li><a href="#live">Coefficient en direct</a></li>
+      <li><a href="#liste">Liste des tours</a></li>
+      <li><a href="#streaks">Compteurs de streaks</a></li>
+      <li><a href="#bloc">Probabilité intra-bloc</a></li>
+      <li><a href="#glissante">Fenêtre glissante</a></li>
+      <li><a href="#tendance">Tendance</a></li>
+      <li><a href="#prediction">Prédiction</a></li>
+      <li><a href="#descriptif">Descriptif</a></li>
+      <li><a href="#seuils">Seuils</a></li>
+      <li><a href="#graphique">Graphique</a></li>
+      <li><a href="#formulaire">Formulaire simulé</a></li>
+      <li><a href="#parametres">Paramètres et pari automatique</a></li>
+      <li><a href="#raccourcis">Raccourcis et astuces</a></li>
+    </ol>
+  </nav>
+
+  <!-- ═══════════ 1. PRÉSENTATION ═══════════ -->
+  <section id="presentation">
+    <h2><span class="num">01</span> Présentation générale</h2>
+    <p>
+      <strong>Lucky Jet Analyzer</strong> est un tableau de bord flottant qui s'installe par-dessus
+      l'interface du jeu. Il observe en continu les coefficients qui défilent, les enregistre, les
+      classe, et t'affiche une série de statistiques et d'indicateurs visuels pour t'aider à
+      comprendre le déroulement de la partie.
+    </p>
+    <p>
+      Le bot fonctionne <strong>en temps réel</strong> : à chaque nouveau tour enregistré, tous les
+      panneaux se recalculent automatiquement. Tu n'as rien à faire, tout est mis à jour en direct.
+    </p>
+
+    <h3>Ce que le bot fait</h3>
+    <ul>
+      <li>Collecte automatique de chaque coefficient terminé</li>
+      <li>Stockage dans un tableau interne infini</li>
+      <li>Calcul de statistiques descriptives (moyenne, médiane, quantiles…)</li>
+      <li>Affichage des fréquences par seuil (≥2x, ≥5x, ≥10x)</li>
+      <li>Compteurs de séries sans atteindre chaque seuil</li>
+      <li>Fenêtre glissante pour suivre l'évolution récente</li>
+      <li>Détection de tendance haussière / baissière / stable</li>
+      <li>Prédiction statistique avec intervalle de confiance</li>
+      <li>Graphique en barres avec plafond ajustable</li>
+      <li>Formulaire simulé pour piloter les paris depuis le bot</li>
+      <li>Système de pari automatique paramétrable</li>
+      <li>Alarmes sonores personnalisables</li>
+    </ul>
+
+    <div class="highlight">
+      💡 <strong>Astuce :</strong> le bot s'installe en un copier-coller dans la console du navigateur.
+      Une fois lancé, il reste actif tant que tu ne fermes pas la page.
+    </div>
+  </section>
+
+  <!-- ═══════════ 2. INTERFACE ═══════════ -->
+  <section id="interface">
+    <h2><span class="num">02</span> L'interface et le panneau</h2>
+    <p>
+      Le panneau se présente sous la forme d'une fenêtre flottante, déplaçable et redimensionnable,
+      qui reste toujours visible par-dessus le jeu.
+    </p>
+
+    <h3>Le header (barre du haut)</h3>
+    <div class="card-grid">
+      <div class="card-mini">
+        <div class="label">🎯 Titre</div>
+        <div class="value">Lucky Jet Analyzer</div>
+        <div class="desc">Identifie le panneau.</div>
+      </div>
+      <div class="card-mini">
+        <div class="label">🔢 Coefficient live</div>
+        <div class="value">8.19x</div>
+        <div class="desc">Affiche la côte en cours, en temps réel.</div>
+      </div>
+      <div class="card-mini">
+        <div class="label">⚙️ Bouton paramètres</div>
+        <div class="value">Configuration</div>
+        <div class="desc">Ouvre le panneau des réglages.</div>
+      </div>
+      <div class="card-mini">
+        <div class="label">− / ×</div>
+        <div class="value">Minimiser / Fermer</div>
+        <div class="desc">Réduit le panneau ou le retire.</div>
+      </div>
+    </div>
+
+    <h3>Interactions possibles</h3>
+    <ul>
+      <li><strong>Glisser le header</strong> pour déplacer le panneau n'importe où (même hors de l'écran).</li>
+      <li><strong>Coin bas-droit</strong> pour redimensionner la fenêtre.</li>
+      <li><strong>Double-clic</strong> n'importe où sur le panneau pour ouvrir le formulaire simulé.</li>
+      <li><strong>Bouton −</strong> pour réduire le panneau à sa barre de titre.</li>
+      <li><strong>Bouton ×</strong> pour fermer complètement le bot.</li>
+    </ul>
+  </section>
+
+  <!-- ═══════════ 3. COEFFICIENT LIVE ═══════════ -->
+  <section id="live">
+    <h2><span class="num">03</span> Coefficient en direct</h2>
+    <p>
+      En haut du panneau, à côté du titre, le bot affiche le <strong>coefficient actuellement en cours</strong>.
+      Il se met à jour en temps réel pendant que l'avion monte.
+    </p>
+
+    <h3>Comportement</h3>
+    <ul>
+      <li>Pendant le vol : la valeur défile en continu (ex. 1.05x → 1.42x → 2.13x → …).</li>
+      <li>La couleur change selon le palier atteint :
+        <span class="dot green"></span>vert sous 2x ·
+        <span class="dot violet"></span>violet sous 5x ·
+        <span class="dot gold"></span>or au-delà
+      </li>
+      <li>Quand l'avion s'envole, la valeur se fige en rouge avec un petit ✈️ pendant 3 secondes.</li>
+      <li>Ensuite, l'affichage revient à <strong>—</strong> jusqu'au prochain vol.</li>
+    </ul>
+
+    <h3>Barre de progression</h3>
+    <p>
+      Une fine barre colorée sous le header se remplit à mesure que le coefficient monte
+      (échelle logarithmique). Elle te donne une idée visuelle immédiate de la hauteur atteinte.
+    </p>
+  </section>
+
+  <!-- ═══════════ 4. LISTE DES TOURS ═══════════ -->
+  <section id="liste">
+    <h2><span class="num">04</span> Liste des tours</h2>
+    <p>
+      Un bouton <strong>📋 Voir la liste</strong> affiche tous les coefficients enregistrés depuis
+      le lancement du bot, dans une rangée horizontale défilable.
+    </p>
+
+    <h3>Format d'affichage</h3>
+    <ul>
+      <li>Du <strong>plus récent au plus ancien</strong> (le dernier tour à gauche).</li>
+      <li>Chaque coefficient est affiché dans une pastille colorée selon son palier.</li>
+      <li>Défilement horizontal pour parcourir tout l'historique.</li>
+      <li>Aucun numéro de tour — juste la valeur pour un affichage compact.</li>
+    </ul>
+
+    <h3>Couleurs des pastilles</h3>
+    <table>
+      <tr>
+        <th>Palier</th>
+        <th>Couleur</th>
+      </tr>
+      <tr>
+        <td>&lt; 2x</td>
+        <td><span class="dot green"></span>Vert</td>
+      </tr>
+      <tr>
+        <td>2x – 5x</td>
+        <td><span class="dot violet"></span>Violet</td>
+      </tr>
+      <tr>
+        <td>≥ 5x</td>
+        <td><span class="dot gold"></span>Or</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- ═══════════ 5. STREAKS ═══════════ -->
+  <section id="streaks">
+    <h2><span class="num">05</span> Compteurs de streaks</h2>
+    <p>
+      Le module <strong>🔥 STREAKS</strong> affiche en permanence le nombre de tours consécutifs
+      qui n'ont <strong>pas atteint</strong> chacun des trois paliers surveillés.
+    </p>
+
+    <div class="card-grid">
+      <div class="card-mini">
+        <div class="label">Sans ≥ 2x</div>
+        <div class="value">12 tours</div>
+        <div class="desc">Nombre de tours depuis le dernier coefficient ≥ 2x.</div>
+      </div>
+      <div class="card-mini">
+        <div class="label">Sans ≥ 5x</div>
+        <div class="value">70 tours</div>
+        <div class="desc">Nombre de tours depuis le dernier coefficient ≥ 5x.</div>
+      </div>
+      <div class="card-mini">
+        <div class="label">Sans ≥ 10x</div>
+        <div class="value">140 tours</div>
+        <div class="desc">Nombre de tours depuis le dernier coefficient ≥ 10x.</div>
+      </div>
+    </div>
+
+    <h3>Lecture visuelle</h3>
+    <ul>
+      <li>Chaque ligne affiche <strong>X / limite</strong>, où X est le compteur actuel.</li>
+      <li>Une barre de progression se remplit à mesure que X approche de la limite.</li>
+      <li>Couleur : <span class="dot green"></span>vert (&lt; 70 %) ·
+        <span class="dot gold"></span>or (70–99 %) ·
+        <span class="dot red"></span>rouge (limite atteinte)</li>
+    </ul>
+
+    <h3>Remise à zéro</h3>
+    <p>
+      Le compteur se remet à <strong>0</strong> uniquement lorsqu'un coefficient du palier
+      correspondant apparaît. Par exemple, dès qu'un tour atteint ≥ 5x, le compteur
+      « Sans ≥ 5x » repart à zéro.
+    </p>
+
+    <h3>Utilité</h3>
+    <p>
+      Ces compteurs te permettent de suivre d'un coup d'œil l'écart entre les gros coefficients
+      et de visualiser la rareté relative de chaque palier.
+    </p>
+  </section>
+
+  <!-- ═══════════ 6. PROBABILITÉ INTRA-BLOC ═══════════ -->
+  <section id="bloc">
+    <h2><span class="num">06</span> Probabilité intra-bloc</h2>
+    <p>
+      Le module <strong>🧩 PROBABILITÉ INTRA-BLOC</strong> découpe l'historique en blocs de taille fixe
+      (au choix : 5, 10, 15, 20, 25, 50, 100 ou 200 tours) et calcule, pour le bloc en cours,
+      la probabilité qu'<strong>au moins un coefficient</strong> de chaque palier apparaisse dans
+      les tours restants.
+    </p>
+
+    <h3>Ce que ça affiche</h3>
+    <ul>
+      <li>Le numéro du bloc en cours (ex. <em>bloc #201–300</em>)</li>
+      <li>Le tour actuel dans le bloc (ex. <em>Tour 42 / 100</em>)</li>
+      <li>Le nombre de tours restants avant la fin du bloc</li>
+      <li>L'historique visuel du bloc sous forme de petits carrés colorés</li>
+      <li>Trois lignes : <strong>≥ 2x</strong>, <strong>≥ 5x</strong>, <strong>≥ 10x</strong></li>
+      <li>Pour chaque palier : la probabilité d'apparition + intervalle de confiance à 95 %</li>
+      <li>Le récapitulatif de ce qui est déjà sorti dans le bloc</li>
+    </ul>
+
+    <h3>Formule utilisée</h3>
+    <div class="card">
+      <p style="margin:0; font-family: monospace; color: var(--violet-3); font-size: 14px;">
+        P(≥ 1 coef ≥ k) = 1 − (1 − p)<sup>n</sup>
+      </p>
+      <p style="margin-top:10px; margin-bottom:0; font-size:13px;">
+        où <em>p</em> est la fréquence globale du palier et <em>n</em> le nombre de tours restants.
+      </p>
+    </div>
+
+    <h3>Taille de bloc</h3>
+    <p>
+      Tu peux changer la taille à tout moment via les boutons au-dessus du bloc. Plus la taille est
+      grande, plus la probabilité calculée sera fiable, mais plus il faudra attendre pour voir un
+      bloc complet.
+    </p>
+
+    <h3>Lecture du verdict</h3>
+    <ul>
+      <li><span class="badge-inline badge-green">≥ 80 %</span> probabilité élevée d'apparition</li>
+      <li><span class="badge-inline badge-gold">50 – 80 %</span> probabilité modérée</li>
+      <li><span class="badge-inline badge-red">&lt; 50 %</span> probabilité faible</li>
+    </ul>
+  </section>
+
+  <!-- ═══════════ 7. FENÊTRE GLISSANTE ═══════════ -->
+  <section id="glissante">
+    <h2><span class="num">07</span> Fenêtre glissante</h2>
+    <p>
+      Le module <strong>🔄 FENÊTRE GLISSANTE</strong> affiche les fréquences calculées uniquement
+      sur les <strong>N derniers tours</strong> (N configurable : 10, 15, 20, 25, 30, 50, 100).
+    </p>
+
+    <h3>Principe</h3>
+    <p>
+      À chaque nouveau tour, la fenêtre « glisse » d'un cran : elle oublie le tour le plus ancien
+      et intègre le nouveau. C'est une photo mobile de l'activité récente.
+    </p>
+
+    <h3>Ce que ça affiche</h3>
+    <table>
+      <tr>
+        <th>Ligne</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td><strong>P(≥ 2x) glissant</strong></td>
+        <td>Proportion de tours ≥ 2x dans la fenêtre + IC 95 %</td>
+      </tr>
+      <tr>
+        <td><strong>P(≥ 5x) glissant</strong></td>
+        <td>Proportion de tours ≥ 5x dans la fenêtre + IC 95 %</td>
+      </tr>
+      <tr>
+        <td><strong>P(≥ 10x) glissant</strong></td>
+        <td>Proportion de tours ≥ 10x dans la fenêtre + IC 95 %</td>
+      </tr>
+      <tr>
+        <td><strong>Réf. globale</strong></td>
+        <td>Même proportion mais sur tout l'historique</td>
+      </tr>
+      <tr>
+        <td><strong>Verdict z</strong></td>
+        <td>Comparaison fenêtre vs référence globale</td>
+      </tr>
+    </table>
+
+    <h3>Verdict</h3>
+    <ul>
+      <li><span class="badge-inline badge-green">✅ dans la norme</span> la fenêtre est cohérente avec la référence.</li>
+      <li><span class="badge-inline badge-red">⚠️ HORS NORME</span> la fenêtre s'écarte significativement.</li>
+    </ul>
+
+    <h3>Courbe d'évolution</h3>
+    <p>
+      Un mini-graphe en bas du bloc montre l'évolution de chaque fréquence au fil du temps.
+      Trois lignes colorées (violet pour 2x, or pour 5x, rouge pour 10x) et des lignes pointillées
+      horizontales servant de repère (référence globale).
+    </p>
+  </section>
+
+  <!-- ═══════════ 8. TENDANCE ═══════════ -->
+  <section id="tendance">
+    <h2><span class="num">08</span> Tendance</h2>
+    <p>
+      Le module <strong>📈 TENDANCE</strong> compare la première moitié de l'historique à la seconde
+      moitié, pour détecter un éventuel mouvement global.
+    </p>
+
+    <h3>Verdict</h3>
+    <ul>
+      <li><span class="dot green"></span>📈 <strong>HAUSSIÈRE</strong> — la moyenne récente est plus élevée</li>
+      <li><span class="dot red"></span>📉 <strong>BAISSIÈRE</strong> — la moyenne récente est plus basse</li>
+      <li><span class="dot gold"></span>➡️ <strong>STABLE</strong> — pas d'écart significatif</li>
+    </ul>
+
+    <h3>Détails affichés</h3>
+    <div class="card-grid">
+      <div class="card-mini">
+        <div class="label">Moy. ancienne</div>
+        <div class="desc">Moyenne de la première moitié</div>
+      </div>
+      <div class="card-mini">
+        <div class="label">Moy. récente</div>
+        <div class="desc">Moyenne de la seconde moitié</div>
+      </div>
+      <div class="card-mini">
+        <div class="label">Écart</div>
+        <div class="desc">Différence en valeur absolue et en %</div>
+      </div>
+      <div class="card-mini">
+        <div class="label">Force</div>
+        <div class="desc">Légère / modérée / marquée</div>
+      </div>
+    </div>
+
+    <h3>Interprétation</h3>
+    <p>
+      La force dépend de l'écart relatif : moins de 20 % → légère, entre 20 et 40 % → modérée,
+      au-delà de 40 % → marquée. Les gros coefficients peuvent accentuer artificiellement la
+      tendance, il est utile de croiser cette info avec la médiane du bloc Descriptif.
+    </p>
+  </section>
+
+  <!-- ═══════════ 9. PRÉDICTION ═══════════ -->
+  <section id="prediction">
+    <h2><span class="num">09</span> Prédiction</h2>
+    <p>
+      Le module <strong>🔮 PRÉDICTION</strong> affiche les fréquences globales observées pour chaque
+      palier, accompagnées de leur intervalle de confiance à 95 %.
+    </p>
+
+    <h3>Ce que ça affiche</h3>
+    <table>
+      <tr>
+        <th>Palier</th>
+        <th>Fréquence</th>
+        <th>IC 95 %</th>
+      </tr>
+      <tr>
+        <td>≥ 2x</td>
+        <td>34 %</td>
+        <td>[30 – 38]</td>
+      </tr>
+      <tr>
+        <td>≥ 5x</td>
+        <td>11 %</td>
+        <td>[9 – 14]</td>
+      </tr>
+      <tr>
+        <td>≥ 10x</td>
+        <td>6 %</td>
+        <td>[5 – 9]</td>
+      </tr>
+    </table>
+
+    <h3>Niveau de confiance</h3>
+    <ul>
+      <li>Faible : moins de 100 tours enregistrés</li>
+      <li>Moyenne : 100 à 300 tours</li>
+      <li>Élevée : 300 à 600 tours</li>
+      <li>Très élevée : plus de 600 tours</li>
+    </ul>
+
+    <p>
+      Plus le nombre de tours augmente, plus l'intervalle de confiance se resserre autour de la
+      fréquence réelle. C'est l'illustration directe de la loi des grands nombres.
+    </p>
+  </section>
+
+  <!-- ═══════════ 10. DESCRIPTIF ═══════════ -->
+  <section id="descriptif">
+    <h2><span class="num">10</span> Descriptif</h2>
+    <p>
+      Le bloc <strong>📊 DESCRIPTIF</strong> regroupe les statistiques fondamentales de l'échantillon.
+    </p>
+
+    <div class="card-grid">
+      <div class="card-mini">
+        <div class="label">Moyenne</div>
+        <div class="value">3.50</div>
+        <div class="desc">Somme divisée par le nombre de tours.</div>
+      </div>
+      <div class="card-mini">
+        <div class="label">Médiane</div>
+        <div class="value">1.90</div>
+        <div class="desc">Valeur qui coupe l'échantillon en deux.</div>
+      </div>
+      <div class="card-mini">
+        <div class="label">Écart-type</div>
+        <div class="value">2.87</div>
+        <div class="desc">Mesure de la dispersion.</div>
+      </div>
+      <div class="card-mini">
+        <div class="label">Min / Max</div>
+        <div class="value">1.00 / 11.95</div>
+        <div class="desc">Valeurs extrêmes observées.</div>
+      </div>
+      <div class="card-mini">
+        <div class="label">Q10 / Q90</div>
+        <div class="value">1.18 / 7.48</div>
+        <div class="desc">10 % des tours sont sous Q10, 10 % au-dessus de Q90.</div>
+      </div>
+    </div>
+
+    <div class="highlight">
+      💡 La <strong>médiane</strong> est souvent plus représentative que la moyenne, car elle est
+      moins influencée par les valeurs exceptionnelles.
+    </div>
+  </section>
+
+  <!-- ═══════════ 11. SEUILS ═══════════ -->
+  <section id="seuils">
+    <h2><span class="num">11</span> Seuils (IC 95 %)</h2>
+    <p>
+      Le bloc <strong>🎯 SEUILS</strong> récapitule, pour chaque palier, le nombre de tours qui l'ont
+      atteint, la fréquence correspondante et son intervalle de confiance.
+    </p>
+
+    <table>
+      <tr>
+        <th>Seuil</th>
+        <th>Fréquence</th>
+        <th>IC 95 %</th>
+        <th>Effectif</th>
+      </tr>
+      <tr>
+        <td>≥ 2x</td>
+        <td>34 %</td>
+        <td>[30 – 38]</td>
+        <td>215 / 635</td>
+      </tr>
+      <tr>
+        <td>≥ 5x</td>
+        <td>11 %</td>
+        <td>[9 – 14]</td>
+        <td>72 / 635</td>
+      </tr>
+      <tr>
+        <td>≥ 10x</td>
+        <td>6 %</td>
+        <td>[5 – 9]</td>
+        <td>40 / 635</td>
+      </tr>
+    </table>
+
+    <p>
+      L'intervalle de confiance à 95 % te donne la fourchette dans laquelle se situe très
+      probablement la fréquence réelle du jeu.
+    </p>
+  </section>
+
+  <!-- ═══════════ 12. GRAPHIQUE ═══════════ -->
+  <section id="graphique">
+    <h2><span class="num">12</span> Graphique</h2>
+    <p>
+      En bas du panneau, un graphique en barres affiche chaque coefficient enregistré sous forme
+      de barre verticale colorée.
+    </p>
+
+    <h3>Caractéristiques</h3>
+    <ul>
+      <li>Une barre par tour enregistré.</li>
+      <li>Hauteur proportionnelle à la valeur du coefficient.</li>
+      <li>Couleur selon le palier : <span class="dot green"></span>vert &lt; 2x ·
+        <span class="dot violet"></span>violet 2–5x ·
+        <span class="dot gold"></span>or ≥ 5x</li>
+      <li>Défilement horizontal automatique vers la droite (dernier tour visible).</li>
+      <li>Tooltip au survol : « Tour #N — 3.42x »</li>
+    </ul>
+
+    <h3>Plafond (cap)</h3>
+    <p>
+      Pour éviter qu'un coefficient très élevé n'écrase visuellement toutes les autres barres,
+      un plafond est appliqué. Les valeurs qui le dépassent sont affichées en hauteur maximale
+      avec un effet lumineux.
+    </p>
+    <p>
+      Tu peux ajuster le plafond avec les boutons <strong>− / +</strong> à droite du titre du
+      graphique (2x par défaut, ajustable jusqu'à 1000x).
+    </p>
+  </section>
+
+  <!-- ═══════════ 13. FORMULAIRE SIMULÉ ═══════════ -->
+  <section id="formulaire">
+    <h2><span class="num">13</span> Formulaire simulé</h2>
+    <p>
+      Un <strong>double-clic n'importe où sur le panneau</strong> ouvre un formulaire compact qui
+      reproduit les commandes du jeu. Chaque clic est automatiquement relayé vers le formulaire
+      principal.
+    </p>
+
+    <h3>Éléments disponibles</h3>
+    <table>
+      <tr>
+        <th>Élément</th>
+        <th>Action</th>
+      </tr>
+      <tr>
+        <td><strong>− / +</strong></td>
+        <td>Diminuer / augmenter la mise (appui long = répétition automatique)</td>
+      </tr>
+      <tr>
+        <td><strong>💰 Montant</strong></td>
+        <td>Affiche la mise en cours (synchronisée avec le jeu)</td>
+      </tr>
+      <tr>
+        <td><strong>750 · 15K · 250K · 5M</strong></td>
+        <td>Mises rapides prédéfinies</td>
+      </tr>
+      <tr>
+        <td><strong>AutoBet</strong></td>
+        <td>Activer / désactiver le pari automatique du jeu</td>
+      </tr>
+      <tr>
+        <td><strong>AutoCashOut</strong></td>
+        <td>Activer / désactiver le retrait automatique du jeu</td>
+      </tr>
+      <tr>
+        <td><strong>🎯 PARI</strong></td>
+        <td>Déclencher un pari immédiat</td>
+      </tr>
+    </table>
+
+    <h3>Fermeture</h3>
+    <p>
+      Le formulaire se ferme avec le bouton <strong>✕</strong> en haut à droite du bloc. Il ne
+      se ferme pas si tu cliques ailleurs.
+    </p>
+  </section>
+
+  <!-- ═══════════ 14. PARAMÈTRES ═══════════ -->
+  <section id="parametres">
+    <h2><span class="num">14</span> Paramètres et pari automatique</h2>
+    <p>
+      Le bouton <strong>⚙️</strong> dans le header ouvre un panneau de configuration avancé pour le
+      système de pari automatique.
+    </p>
+
+    <h3>Montant de base</h3>
+    <p>
+      Le montant utilisé pour le premier pari de chaque séquence. Les paris suivants peuvent être
+      ajustés selon la stratégie de martingale.
+    </p>
+
+    <h3>Configuration par cible</h3>
+    <p>
+      Pour chacune des trois cibles (<strong>2x</strong>, <strong>5x</strong>, <strong>10x</strong>),
+      tu peux régler indépendamment :
+    </p>
+
+    <div class="card-grid">
+      <div class="card-mini">
+        <div class="label">Placer pari</div>
+        <div class="desc">Active le déclenchement automatique pour cette cible.</div>
+      </div>
+      <div class="card-mini">
+        <div class="label">Martingale</div>
+        <div class="desc">Double la mise après chaque perte (×2).</div>
+      </div>
+      <div class="card-mini">
+        <div class="label">Nombre d'essais</div>
+        <div class="desc">Nombre de paris à placer avant d'arrêter la séquence.</div>
+      </div>
+      <div class="card-mini">
+        <div class="label">Alarme sonore</div>
+        <div class="desc">Joue 3 bips courts quand la séquence démarre.</div>
+      </div>
+    </div>
+
+    <h3>Déroulement d'une séquence</h3>
+    <ol style="padding-left: 20px; color: var(--text-dim); font-size: 15px; line-height: 1.9;">
+      <li>Le compteur de streak de la cible atteint sa limite.</li>
+      <li>Si « Placer pari » est activé, la séquence démarre.</li>
+      <li>Le montant de base est écrit dans le formulaire du jeu.</li>
+      <li>Un clic automatique sur <strong>Pari</strong> est déclenché.</li>
+      <li>Si le coefficient atteint la cible → <strong>3 bips</strong> + fin de séquence.</li>
+      <li>Si perdu et essais restants → essai suivant (mise ×2 si martingale).</li>
+      <li>Si plus d'essais → fin de séquence, retour à la surveillance.</li>
+    </ol>
+
+    <h3>Priorité</h3>
+    <p>
+      Si plusieurs cibles atteignent leur limite au même tour, le bot donne la priorité à la
+      cible la plus haute : <strong>10x &gt; 5x &gt; 2x</strong>.
+    </p>
+
+    <h3>Une seule séquence à la fois</h3>
+    <p>
+      Le bot ne lance jamais deux séquences simultanément. Si une séquence est en cours, les
+      autres cibles attendent leur tour.
+    </p>
+  </section>
+
+  <!-- ═══════════ 15. RACCOURCIS ═══════════ -->
+  <section id="raccourcis">
+    <h2><span class="num">15</span> Raccourcis et astuces</h2>
+
+    <h3>Commandes console</h3>
+    <table>
+      <tr>
+        <th>Commande</th>
+        <th>Effet</th>
+      </tr>
+      <tr>
+        <td><code>LJ.debug()</code></td>
+        <td>Affiche l'état complet du bot dans la console</td>
+      </tr>
+      <tr>
+        <td><code>LJ.state.results</code></td>
+        <td>Tableau contenant tous les coefficients enregistrés</td>
+      </tr>
+      <tr>
+        <td><code>LJ.setCap(n)</code></td>
+        <td>Change le plafond du graphique</td>
+      </tr>
+      <tr>
+        <td><code>LJ.setSlidingSize(n)</code></td>
+        <td>Change la taille de la fenêtre glissante</td>
+      </tr>
+      <tr>
+        <td><code>LJ.setBlockSize(n)</code></td>
+        <td>Change la taille des blocs</td>
+      </tr>
+      <tr>
+        <td><code>LJ.openBetForm()</code></td>
+        <td>Ouvre le formulaire simulé</td>
+      </tr>
+      <tr>
+        <td><code>LJ.openSettings()</code></td>
+        <td>Ouvre le panneau des paramètres</td>
+      </tr>
+      <tr>
+        <td><code>LJ.reset()</code></td>
+        <td>Efface tout l'historique</td>
+      </tr>
+      <tr>
+        <td><code>LJ.stop()</code></td>
+        <td>Arrête le bot (déconnecte l'observation)</td>
+      </tr>
+    </table>
+
+    <h3>Astuces d'utilisation</h3>
+    <ul>
+      <li>Déplace le panneau dans un coin pour ne pas gêner la vue du jeu.</li>
+      <li>Réduis-le avec <strong>−</strong> pour ne garder que la barre de titre.</li>
+      <li>Utilise le plafond du graphique pour bien visualiser les petits coefficients.</li>
+      <li>Change la taille de la fenêtre glissante selon ce que tu veux observer.</li>
+      <li>Active l'alarme sonore pour être averti quand une séquence démarre.</li>
+      <li>Configure la martingale et le nombre d'essais selon ta tolérance.</li>
+    </ul>
+
+    <div class="highlight">
+      ✨ <strong>Bon à savoir :</strong> tous les modules sont indépendants les uns des autres.
+      Tu peux observer uniquement ceux qui t'intéressent, sans que les autres soient affectés.
+    </div>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer>
+    <div class="logo">🎯 Lucky Jet Analyzer</div>
+    <p>Documentation complète des fonctionnalités — v11</p>
+    <a href="https://wa.me/2290155660457?text=Bonjour%2C%20je%20vous%20contacte%20au%20sujet%20du%20Lucky%20Jet%20Analyzer" target="_blank" rel="noopener" class="whatsapp-btn whatsapp-btn-footer">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M20.52 3.48A11.94 11.94 0 0 0 12.02 0C5.4 0 .02 5.38.02 12c0 2.12.55 4.18 1.6 6L0 24l6.18-1.6a11.94 11.94 0 0 0 5.84 1.5h.01c6.62 0 12-5.38 12-12 0-3.2-1.25-6.22-3.51-8.42zM12.03 21.8h-.01a9.86 9.86 0 0 1-5.03-1.38l-.36-.22-3.67.95.98-3.57-.23-.37a9.85 9.85 0 0 1-1.51-5.21c0-5.44 4.43-9.87 9.88-9.87 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.98c0 5.44-4.43 9.87-9.87 9.87zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.19 1.87.12.57-.08 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35z"/>
+      </svg>
+      Contacter sur WhatsApp
+    </a>
+    <p style="margin-top: 12px;">Bonne analyse et bonne chance ✨</p>
+  </footer>
+
+</div>
+</body>
+</html>

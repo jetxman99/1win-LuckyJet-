@@ -3,7 +3,103 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lucky Jet Analyzer — Documentation</title>
+
+<!-- ═══════════ SEO PRINCIPAL ═══════════ -->
+<title>Lucky Jet Analyzer — Documentation officielle | Analyse temps réel</title>
+<meta name="description" content="Documentation complète du Lucky Jet Analyzer : analyse en temps réel des coefficients, fenêtre glissante, probabilité intra-bloc, compteurs de streaks, pari automatique et alertes sonores.">
+<meta name="keywords" content="Lucky Jet, analyzer, analyse, coefficients, statistiques, streaks, fenêtre glissante, probabilité, pari automatique, bot, jeu de crash">
+<meta name="author" content="Lucky Jet Analyzer">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="language" content="French">
+<meta name="geo.region" content="CI">
+<meta name="theme-color" content="#6a3aff">
+<link rel="canonical" href="https://jetxman99.github.io/1win-LuckyJet-/">
+
+<!-- ═══════════ FAVICON ═══════════ -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+
+<!-- ═══════════ OPEN GRAPH (Facebook, WhatsApp, LinkedIn) ═══════════ -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lucky Jet Analyzer — Documentation officielle">
+<meta property="og:description" content="Documentation complète du Lucky Jet Analyzer : analyse en temps réel, statistiques, pari automatique.">
+<meta property="og:url" content="https://jetxman99.github.io/1win-LuckyJet-/">
+<meta property="og:image" content="https://lucky-jet-1win.com.ci/wp-content/uploads/2024/11/1win-lucky-jet-game-on-the-official-website.webp">
+<meta property="og:site_name" content="Lucky Jet Analyzer">
+<meta property="og:locale" content="fr_FR">
+
+<!-- ═══════════ TWITTER CARD ═══════════ -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lucky Jet Analyzer — Documentation officielle">
+<meta name="twitter:description" content="Documentation complète du Lucky Jet Analyzer : analyse en temps réel, statistiques, pari automatique.">
+<meta name="twitter:image" content="https://lucky-jet-1win.com.ci/wp-content/uploads/2024/11/1win-lucky-jet-game-on-the-official-website.webp">
+
+<!-- ═══════════ STRUCTURED DATA (JSON-LD) ═══════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Lucky Jet Analyzer",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "description": "Tableau de bord d'analyse en temps réel pour le jeu Lucky Jet. Statistiques, streaks, fenêtre glissante, probabilité intra-bloc, pari automatique.",
+  "url": "https://jetxman99.github.io/1win-LuckyJet-/",
+  "inLanguage": "fr",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "EUR"
+  },
+  "featureList": [
+    "Analyse en temps réel des coefficients",
+    "Fenêtre glissante configurable",
+    "Probabilité intra-bloc",
+    "Compteurs de streaks (2x, 5x, 10x)",
+    "Tendance haussière / baissière",
+    "Graphique en barres avec plafond ajustable",
+    "Formulaire simulé",
+    "Pari automatique avec martingale",
+    "Alarmes sonores"
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "ratingCount": "1"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce que le Lucky Jet Analyzer ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le Lucky Jet Analyzer est un tableau de bord flottant qui observe en continu les coefficients du jeu Lucky Jet, les enregistre et affiche des statistiques en temps réel."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment installer le Lucky Jet Analyzer ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le bot s'installe en un copier-coller dans la console du navigateur. Une fois lancé, il reste actif tant que la page n'est pas fermée."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels modules sont disponibles dans le bot ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le bot inclut : analyse en temps réel, fenêtre glissante, probabilité intra-bloc, compteurs de streaks, tendance, prédiction statistique, graphique en barres, formulaire simulé et pari automatique."
+      }
+    }
+  ]
+}
+</script>
+
 <style>
   :root {
     --violet-1: #6a3aff;
@@ -70,6 +166,14 @@
     font-size: 16px;
     max-width: 600px;
     margin: 0 auto;
+  }
+  header .hero-img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 24px;
+    border-radius: 12px;
+    border: 1px solid rgba(157, 122, 255, 0.2);
+    box-shadow: 0 8px 30px rgba(106, 58, 255, 0.3);
   }
 
   /* TABLE OF CONTENTS */
@@ -256,6 +360,14 @@
   td { color: var(--text-dim); }
   td strong { color: #fff; }
   tr:last-child td { border-bottom: none; }
+  code {
+    background: rgba(106, 58, 255, 0.15);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'SF Mono', Consolas, monospace;
+    font-size: 13px;
+    color: var(--violet-3);
+  }
 
   /* HIGHLIGHT */
   .highlight {
@@ -301,12 +413,39 @@
   .badge-red { background: rgba(248, 113, 113, 0.15); color: var(--red); }
   .badge-violet { background: rgba(157, 122, 255, 0.18); color: var(--violet-2); }
 
-  /* ANIMATION on load */
+  /* ANIMATION */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
   }
   section { animation: fadeUp 0.5s ease-out; }
+
+  /* BOUTON WHATSAPP */
+  .whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 18px;
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .whatsapp-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+    color: #fff;
+  }
+  .whatsapp-btn svg { flex-shrink: 0; }
+  .whatsapp-btn-footer {
+    margin-top: 16px;
+    margin-bottom: 4px;
+  }
 
   /* MOBILE */
   @media (max-width: 640px) {
@@ -315,33 +454,6 @@
     section h2 { font-size: 21px; }
     .toc ol { grid-template-columns: 1fr; }
   }
-/* BOUTON WHATSAPP */
-.whatsapp-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #25D366, #128C7E);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 30px;
-  font-size: 14px;
-  font-weight: 700;
-  margin-top: 18px;
-  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
-  transition: transform 0.15s, box-shadow 0.15s;
-}
-.whatsapp-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
-  color: #fff;
-}
-.whatsapp-btn svg { flex-shrink: 0; }
-.whatsapp-btn-footer {
-  margin-top: 16px;
-  margin-bottom: 4px;
-}
-   
 </style>
 </head>
 <body>
@@ -352,17 +464,17 @@
     <div class="badge">Documentation officielle</div>
     <h1>🎯 Lucky Jet Analyzer</h1>
     <p>Guide complet des fonctionnalités — analyse en temps réel, suivi des coefficients, alertes, et paramètres avancés.</p>
-    <a href="https://wa.me/2290155660457?text=Bonjour%2C%20je%20vous%20contacte%20au%20sujet%20du%20Lucky%20Jet%20Analyzer" target="_blank" rel="noopener" class="whatsapp-btn">
+    <a href="https://wa.me/2290155660457?text=Bonjour%2C%20je%20vous%20contacte%20au%20sujet%20du%20Lucky%20Jet%20Analyzer" target="_blank" rel="noopener" class="whatsapp-btn" aria-label="Contacter le support sur WhatsApp">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M20.52 3.48A11.94 11.94 0 0 0 12.02 0C5.4 0 .02 5.38.02 12c0 2.12.55 4.18 1.6 6L0 24l6.18-1.6a11.94 11.94 0 0 0 5.84 1.5h.01c6.62 0 12-5.38 12-12 0-3.2-1.25-6.22-3.51-8.42zM12.03 21.8h-.01a9.86 9.86 0 0 1-5.03-1.38l-.36-.22-3.67.95.98-3.57-.23-.37a9.85 9.85 0 0 1-1.51-5.21c0-5.44 4.43-9.87 9.88-9.87 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.98c0 5.44-4.43 9.87-9.87 9.87zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.19 1.87.12.57-.08 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35z"/>
       </svg>
       Contacter sur WhatsApp
     </a>
-    <img src="https://lucky-jet-1win.com.ci/wp-content/uploads/2024/11/1win-lucky-jet-game-on-the-official-website.webp" style="max-width:100%; height:auto;">
+    <img src="https://lucky-jet-1win.com.ci/wp-content/uploads/2024/11/1win-lucky-jet-game-on-the-official-website.webp" alt="Lucky Jet Analyzer — analyse en temps réel des coefficients du jeu Lucky Jet" class="hero-img" loading="lazy" decoding="async">
   </header>
 
   <!-- ═══════════ SOMMAIRE ═══════════ -->
-  <nav class="toc">
+  <nav class="toc" role="navigation" aria-label="Sommaire de la documentation">
     <h2>Sommaire</h2>
     <ol>
       <li><a href="#presentation">Présentation générale</a></li>
@@ -382,6 +494,8 @@
       <li><a href="#raccourcis">Raccourcis et astuces</a></li>
     </ol>
   </nav>
+
+  <main>
 
   <!-- ═══════════ 1. PRÉSENTATION ═══════════ -->
   <section id="presentation">
@@ -1053,11 +1167,13 @@
     </div>
   </section>
 
+  </main>
+
   <!-- ═══════════ FOOTER ═══════════ -->
   <footer>
     <div class="logo">🎯 Lucky Jet Analyzer</div>
     <p>Documentation complète des fonctionnalités — v11</p>
-    <a href="https://wa.me/2290155660457?text=Bonjour%2C%20je%20vous%20contacte%20au%20sujet%20du%20Lucky%20Jet%20Analyzer" target="_blank" rel="noopener" class="whatsapp-btn whatsapp-btn-footer">
+    <a href="https://wa.me/2290155660457?text=Bonjour%2C%20je%20vous%20contacte%20au%20sujet%20du%20Lucky%20Jet%20Analyzer" target="_blank" rel="noopener" class="whatsapp-btn whatsapp-btn-footer" aria-label="Contacter le support sur WhatsApp">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M20.52 3.48A11.94 11.94 0 0 0 12.02 0C5.4 0 .02 5.38.02 12c0 2.12.55 4.18 1.6 6L0 24l6.18-1.6a11.94 11.94 0 0 0 5.84 1.5h.01c6.62 0 12-5.38 12-12 0-3.2-1.25-6.22-3.51-8.42zM12.03 21.8h-.01a9.86 9.86 0 0 1-5.03-1.38l-.36-.22-3.67.95.98-3.57-.23-.37a9.85 9.85 0 0 1-1.51-5.21c0-5.44 4.43-9.87 9.88-9.87 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.98c0 5.44-4.43 9.87-9.87 9.87zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.19 1.87.12.57-.08 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35z"/>
       </svg>
